@@ -13,3 +13,15 @@ test("Displays image for each scoop option from the server", async () => {
   const altText = scoopImages.map((element) => element.alt);
   expect(altText).toEqual(["Chocolate scoop", "Vanilla scoop"]);
 });
+
+test("Display image for each topping option from the server", async () => {
+  render(<Options optionType="toppings" />);
+
+  //find the images
+  const toppingImages = await screen.findAllByRole("img", { name: /topping$/i });
+  expect(toppingImages).toHaveLength(3);
+
+  //confirm the alt text of images
+  const toppingAltText = toppingImages.map((element) => element.alt);
+  expect(toppingAltText).toEqual(["Cherries topping", "M&Ms topping", "Hot fudge topping"]);
+});
